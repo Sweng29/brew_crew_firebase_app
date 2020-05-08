@@ -1,11 +1,26 @@
+import 'package:brew_crew/screens/authenticate/register.dart';
 import 'package:brew_crew/screens/authenticate/sign_in.dart';
 import 'package:flutter/material.dart';
 
-class Authentication extends StatelessWidget {
+class Authentication extends StatefulWidget {
+  @override
+  _AuthenticationState createState() => new _AuthenticationState();
+}
+
+class _AuthenticationState extends State<Authentication> {
+  bool showSignIn = true;
+
+  void toggleView() {
+    print(showSignIn);
+    setState(() => showSignIn = !showSignIn);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      child: SignIn(),
-    );
+    if (showSignIn) {
+      return SignIn(toggleView: toggleView);
+    } else {
+      return Register(toggleView: toggleView);
+    }
   }
 }

@@ -2,29 +2,28 @@ import 'package:brew_crew/screens/shades/constants.dart';
 import 'package:brew_crew/services/auth.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   final Function toggleView;
 
-  SignIn({this.toggleView});
+  Register({this.toggleView});
 
   @override
-  _SignInState createState() => new _SignInState();
+  _RegisterState createState() => new _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
   final _authService = AuthService();
   String email = '';
   String password = '';
-  String error = '';
-
   final _formKey = GlobalKey<FormState>();
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
         elevation: 3.0,
-        title: Text('Sign in - Brew Crew'),
+        title: Text('Register- Brew Crew'),
         backgroundColor: Colors.teal[500],
         actions: <Widget>[
           FlatButton.icon(
@@ -32,11 +31,11 @@ class _SignInState extends State<SignIn> {
               widget.toggleView();
             },
             icon: Icon(
-              Icons.people,
+              Icons.person,
               color: Colors.white,
             ),
             label: Text(
-              'Register',
+              'Sign in',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -59,6 +58,8 @@ class _SignInState extends State<SignIn> {
             children: <Widget>[
               SizedBox(height: 20),
               TextFormField(
+                decoration:
+                    textDecoration.copyWith(hintText: 'Enter email address'),
                 validator: (val) => val.isEmpty ? 'Enter a valid email.' : null,
                 onChanged: (val) {
                   setState(() => email = val);
@@ -67,8 +68,6 @@ class _SignInState extends State<SignIn> {
                 style: TextStyle(
                   fontSize: 16,
                 ),
-                decoration:
-                    textDecoration.copyWith(hintText: 'Enter email address'),
               ),
               SizedBox(
                 height: 20,
@@ -89,7 +88,7 @@ class _SignInState extends State<SignIn> {
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
                     dynamic result = await _authService
-                        .signInWithEmailAndPassword(email, password);
+                        .registerWithEmailAndPassword(email, password);
                     if (result == null) {
                       setState(() {
                         error = 'Please enter a valid email.';
@@ -99,7 +98,7 @@ class _SignInState extends State<SignIn> {
                 },
                 color: Colors.white,
                 child: Text(
-                  'Sign in',
+                  'Register',
                   style: TextStyle(color: Colors.teal),
                 ),
               ),
