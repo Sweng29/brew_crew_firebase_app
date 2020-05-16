@@ -23,7 +23,7 @@ class Home extends StatelessWidget {
           });
     }
 
-    return new Container(
+    return Container(
       child: StreamProvider<List<Brew>>.value(
         value: DatabaseService().brews,
         child: Scaffold(

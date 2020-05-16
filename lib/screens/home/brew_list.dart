@@ -17,7 +17,7 @@ class _BrewListState extends State<BrewList> {
       itemBuilder: (context, index) {
         return BrewTile(brew: brews[index]);
       },
-      itemCount: brews.length == null ? 0 : brews.length,
+      itemCount: brews.length,
     );
   }
 }
